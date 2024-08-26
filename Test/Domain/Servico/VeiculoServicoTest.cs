@@ -26,20 +26,9 @@ namespace Test.Domain.Servico
         }
 
         [TestMethod]
-        public async Task TestandoSalvarVeiculoAsync()
+        public void TestandoSalvarVeiculoAsync()
         {
             //Arrange
-            var loginDTO = new LoginDTO
-            {
-                Email = "adm@teste.com",
-                Senha = "123456",
-            };
-
-            var content = new StringContent(JsonSerializer.Serialize(loginDTO), Encoding.UTF8, "Application/json");
-
-            //Act
-            var response = await Setup.client.PostAsync("/administradores/login", content);
-
             var context = CriarContextoDeTeste();
             context.Database.ExecuteSqlRaw("TRUNCATE TABLE Veiculos");
 
