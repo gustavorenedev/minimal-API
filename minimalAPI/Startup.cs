@@ -90,7 +90,11 @@ namespace minimal_api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
@@ -100,8 +104,6 @@ namespace minimal_api
             // Endpoints Administrador
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", () => Results.Json(new Home())).AllowAnonymous().WithTags("Home");
-
                 string GerarTokenJWT(Administrador administrador)
                 {
                     if (string.IsNullOrEmpty(key)) return string.Empty;
